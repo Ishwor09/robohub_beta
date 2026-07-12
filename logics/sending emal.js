@@ -3,6 +3,8 @@
 })();
 
 function sendEmail(trackCode) {
+  if(checkNet()){
+    
   let recodMsg = "Hello & Namaste Dear "+toTitleCase(buyerName)+",\nWe have received your order and it is currently under review. Your items will be shipped soon. Below are the details of your order.\n\n Order Id: "+trackCode;
   for (let i = 0; i < items_name.length; i++) {
    recodMsg += "\n "+items_name[i]+"_____   Rs. "+priceing[i];
@@ -42,16 +44,20 @@ function sendEmail(trackCode) {
         document.getElementById("stage_1").style.display = "none";
         document.getElementById("stage_2").style.display = "block";
 
-    console.log("SUCCESS!", response.status, response.text);
   })
   .catch(function(error) {
-
-    console.log("FAILED...", error);
+    orderingLoadHide();
+    alert("Check the Email Address may be it's not valid!");
   });
+  }else{
+    alert("Check the Connection");
+  }
 }
 
 
 function sendEmailForCancel() {
+  if(checkNet()){
+    
   let recodMsg = "Hello & Namaste Dear "+viwerName+",\nWe have received your request to cancel order "+viwerorderID+". This order has now been cancelled successfully, and no further action will be taken.";
 
 recodMsg += "If you had already made a payment, the refund will be processed within a business days 9am to 8pm. You will receive a separate confirmation once the refund is complete.";
@@ -79,5 +85,9 @@ recodMsg += "We’re sorry to see you cancel, but we hope to serve you again in 
 
     console.log("FAILED...", error);
   });
+
+  }else{
+    alert("Check the Connection")
+  }
 }
 
