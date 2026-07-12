@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Robo Maker's hub</title>
+<link rel="stylesheet" href="styles/main.css" media="screen and (min-width: 1024px)">
+<!-- <link rel="stylesheet" href="style-tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)"> -->
+<link rel="stylesheet" href="styles/mobile.css" media="screen and (max-width: 767px)">
+</head>
+<body>
+  
+
+  <nav>
+  <div class="nav-container">
+    <img id="logo" src="robo watermark.png" alt="Logo">
+    <div class="nav-links">
+      <a href="#bag">Components</a>
+      <a href="#kits">Kits</a>
+      <a href="#tools">Tools</a>
+      <a href="#project">Project Kits</a>
+      <a href="#about">About us</a>
+
+    </div>
+    <button onclick="showcart()" class="cart-btn">Check Cart</button>
+  </div>
+</nav>
+
+  <header>
+     <div class="header-text">
+    <h1>Welcome to <br> Robo Maker's Hub</h1>
+    <p>Welcome to the world of Electronics</p>
+  </div>
+  </header>
+
+  <section id="bag" >
+    
+  </section>
+<div id="more_info_id">
+  
+</div>
+
+<div id="viwe_cart" >
+  
+  <div id="show_all">
+    <button style="justify-self: right; margin-bottom: 20px;" onclick="hidecart()" >❌</button>
+    <div id="show_ordered_items">
+      <div id="enterCode">
+        <label style="font-size: 20px; font-weight: bold;">Enter your order ID: </label>
+        <input id="id_track" type="text" maxlength="8" style="text-transform: uppercase;"><br>
+        <button id="get_order_list" onclick="reCall()" >Check Order</button>
+     <p>By entering your order id which we provide in you email you can see you order status and details.</p>
+      </div>
+
+      <div id="data_gets">
+              
+      </div>
+
+
+
+    </div>
+    <div id="show_items">
+    
+    </div>
+    <div id="show_bill">
+        <h2><b>Total:   </b><h1 id="price_show">Rs. 0</h1></h2>
+
+    </div>
+    <button id="checkout" onclick="checkOut()">Checkout</button>
+      
+  </div>
+  
+</div>
+ 
+  <section id="kits">
+    
+  </section>
+
+  <section id="tools">
+    <h2>Contact</h2>
+    <p>Email us at: example@email.com</p>
+  </section>
+
+  <section id="project">
+    <h2>Contact</h2>
+    <p>Email us at: example@email.com</p>
+  </section>
+
+   <section id="about">
+    <h2>About Us</h2>
+    <p>This is a simple single-page layout with orange as the primary color.</p>
+  </section>
+
+  <div class="loading_screen" id="adding_cart">
+    <div><img src="icons8-shopping-cart.gif" alt=""></div>
+    <br><p>Added in cart.</p>
+  </div>
+  <div class="loading_screen" id="purchecing">
+    <div><img src="Order Placed.gif" alt=""></div>
+    <br><p>Order Placing...</p>
+  </div>
+
+<div id="orderFormConteneer">
+   
+    <form id="orderForm">
+     <div id="cross_order_form">
+            <button  onclick="hideform()" >❌</button>
+      </div>
+<div id="stage_1">
+  
+  <h2>Place Your Order</h2>
+
+  <label for="name">Full Name*</label>
+  <input type="text" id="name" name="name" maxlength="30" required>
+
+  <label for="email">Email*</label>
+  <input type="email" id="email" name="email" required maxlength="150" >
+
+  <label for="phone">Phone Number*</label>
+  <input type="tel" id="phone" name="phone"  maxlength="10" pattern="[0-9]{10}"  required>
+
+    <label for="district">Select District*</label>
+<select  id="district" name="district" required></select>
+
+  <label for="location">Location*</label>
+  <input type="text" id="location" name="location" placeholder="Street, City" maxlength="250"  required>
+    
+  <label for="map">Google Map Link</label>
+  <input type="url" id="map" name="map" placeholder="https://maps.google.com/..." maxlength="1500" >
+
+  <label>Payment Method</label>
+<select id="Payment" name="Payment" required onchange="paymentMethords()">
+  <option value="cod">Cash on Deivery</option>
+  <option value="pre pay">Online Payment</option>
+</select>
+
+<div id="payment_final">
+ <div id="pre_payment_bar">
+   <label class="switch" >
+
+  <input type="checkbox" id="myToggle" onclick="toggle_payment()"> 
+  <span class="slider"></span>
+
+</label>
+      <h2 style="justify-self: center; text-align: center;" id="qr_title" ></h2>
+
+
+  <img class="payment_qr" id="khalti" src="Kalti.jpg" alt="">
+  <img class="payment_qr" id="bank" src="Laxmi.jpg" alt="">
+
+ </div>
+  <label>Urgent Mode<input id="tick" type="checkbox" onclick="urgentMode()" name="Urgent"></label>
+  <label id="shiping_fee">Delivery Charge: Rs. 150</label>
+  <label id="grand_total"></label>
+
+</div>
+  <button type="button" id="place_order" onclick="placeOrder()">Place Order</button>
+</div>
+<div id="stage_2">
+  <h1 id="done_okay" >✔️</h1>
+  <h1 id="done_okay2" >Done </h1>
+  <p id="notes" ><i>Order Details and every updates are inform via you email so check ther mail. Mail can be shift to spam section so check them Thank you for chooseing us</i> 
+  <br>
+  <strong>Welcome to the World of Electronics 👍😊</strong>
+  </p>
+
+
+
+</div>
+</form>
+  </div>
+
+  </body>
+
+
+  <footer>
+    <p>&copy; 2026 Robo Maker's hub Webpage </p>
+  </footer>
+  <script type="module" src="logics/fatching.js"></script>
+
+<script src="logics/variables.js" ></script>
+<script src="logics/main_logic.js" ></script>
+<script type="text/javascript" src="logics/ordermannager.js"></script>
+<script  src="logics/orderCheck.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="logics/sending emal.js"></script>
+<script src="logics/load_page.js" ></script>
+</html>
