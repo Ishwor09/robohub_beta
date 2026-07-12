@@ -25,12 +25,24 @@ header h1{
 }
 
 .header-text {
+  
   text-align: left;   /* center text */
+    overflow: hidden;
+  
   margin-top: 10px;     /* add spacing below logo if needed */
 
 }
+/* .header-text img {
+  position: absolute;
+  top: -15px; 
+  left: 20%;
+  width: 500px;
+  height: 250px;
+  z-index: 0;
+} */
 
 .header-text h1 {
+  z-index: 5000;
   margin: 0;            /* remove default margin */
 }
 
@@ -83,6 +95,8 @@ header h1{
     section {
       padding: 40px;
       text-align: center;
+  justify-items: center;
+  border-bottom: 3px orangered solid;
     }
 
     .btn {
@@ -127,10 +141,10 @@ header h1{
 .showing_conteneer{
   position:static;
   display:flex;
-  border-top: orangered solid 2px;
-  border-bottom: orangered solid 2px;
+  border-right: orangered solid 2px;
+  border-left: orangered solid 2px;
   height: 22pc;
-  width: 100%;
+  width: 90%;
   text-align: center;
     padding: 15px;
     padding-bottom: 25px;
@@ -679,4 +693,7 @@ overflow-y: scroll; /* vertical scroll */
 }
 #cancel:hover{
   background: rgba(10,0,0,0.2)
+}
+#noteNotFound{
+  display: none;
 }
