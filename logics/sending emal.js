@@ -52,7 +52,7 @@ function sendEmail(trackCode) {
 
 
 function sendEmailForCancel() {
-  let recodMsg = "Hello & Namaste Dear "+viwerName(v)+",\nWe have received your request to cancel order "+viwerorderID+". This order has now been cancelled successfully, and no further action will be taken.";
+  let recodMsg = "Hello & Namaste Dear "+viwerName+",\nWe have received your request to cancel order "+viwerorderID+". This order has now been cancelled successfully, and no further action will be taken.";
 
 recodMsg += "If you had already made a payment, the refund will be processed within a business days 9am to 8pm. You will receive a separate confirmation once the refund is complete.";
 recodMsg += "We’re sorry to see you cancel, but we hope to serve you again in the future. If you have any questions, please contact us."
