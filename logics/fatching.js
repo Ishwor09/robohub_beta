@@ -97,6 +97,9 @@ showLoadingCursor();
         reShow();
         
       } else {
+        document.getElementById("noteNotFound").style.display = "block";
+        resetCursor();
+
         console.log("❌ Main tag VWHM4311 does not exist or is empty.");
       }
     })
