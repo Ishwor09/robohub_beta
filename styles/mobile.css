@@ -683,3 +683,6 @@ overflow-y: scroll; /* vertical scroll */
 #cancel:hover{
   background: rgba(10,0,0,0.2)
 }
+#noteNotFound{
+  display: none;
+}
