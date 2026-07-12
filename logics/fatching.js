@@ -34,7 +34,8 @@ function generateCode() {
   const analytics = getAnalytics(app);
   const db = getDatabase(app); // <-- Don't forget to initialize the database!
 window.sendingDatas = function() {
-  orderingLoadShow();
+  if(checkNet()){
+    orderingLoadShow();
     console.log("Data fetching..");
 
   let order_code = generateCode()+buyerPhone.slice(-4);
@@ -63,10 +64,17 @@ window.sendingDatas = function() {
     .catch((error) => {
       console.error("Error sending data:", error);
     });
+  }
+    else{
+      alert("Check the Connection!");
+
+  }
+  
 };
 
 window.reCall = function() {
-  showLoadingCursor();
+  if(checkNet()){
+showLoadingCursor();
   const orderId = document.getElementById("id_track").value;
  get(ref(db, orderId))
     .then((snapshot) => {
@@ -95,6 +103,12 @@ window.reCall = function() {
     .catch((error) => {
       console.error("Error fetching main tag:", error);
     });
+
+  }else{
+      alert("Check the Connection!");
+
+  }
+  
 };
 
 
