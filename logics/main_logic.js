@@ -41,6 +41,7 @@ function hidecart() {
   if(items_name.length > 0){
     document.getElementById("show_ordered_items").style.display = "none";
   document.getElementById("show_items").style.display = "block";   
+
   }else{
     document.getElementById("show_ordered_items").style.display = "block";
   document.getElementById("show_items").style.display = "none";
@@ -50,6 +51,8 @@ function hidecart() {
 
 
   }
+  document.getElementById("noteNotFound").style.display = "none";
+
 
 }
 
