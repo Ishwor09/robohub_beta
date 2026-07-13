@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Robo Maker's hub</title>
 <link rel="stylesheet" href="styles/main.css" media="screen and (min-width: 1024px)">
-<!-- <link rel="stylesheet" href="style-tablet.css" media="screen and (min-width: 768px) and (max-width: 1023px)"> -->
+<link rel="stylesheet" href="styles/mid.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
 <link rel="stylesheet" href="styles/mobile.css" media="screen and (max-width: 767px)">
 </head>
 <body>
@@ -14,7 +15,7 @@
 
   <nav>
   <div class="nav-container">
-    <img id="logo" src="robo watermark.png" alt="Logo">
+    <img id="logo" src="resorces/robo watermark.png" alt="Logo">
     <div class="nav-links">
       <a href="#bag">Components</a>
       <a href="#kits">Kits</a>
@@ -29,6 +30,7 @@
 
   <header>
      <div class="header-text">
+      <!-- <img src="resorces/multi flag.png" alt=""> -->
     <h1>Welcome to <br> Robo Maker's Hub</h1>
     <p>Welcome to the world of Electronics</p>
   </div>
@@ -51,7 +53,10 @@
         <input id="id_track" type="text" maxlength="8" style="text-transform: uppercase;"><br>
         <button id="get_order_list" onclick="reCall()" >Check Order</button>
      <p>By entering your order id which we provide in you email you can see you order status and details.</p>
+      <div id="noteNotFound">
+            <h3 >No Found Order ID 🥹<h4>It's may be wrong Order ID, Cancelled Order or Already Order was Completed <i>Check the mail if your order was compelted and want ot see order details. Our System will delet order ID automaticlly affter order Complete. You can request us also by contacting.</i> </h4></h3>
       </div>
+    </div>
 
       <div id="data_gets">
               
@@ -93,11 +98,11 @@
   </section>
 
   <div class="loading_screen" id="adding_cart">
-    <div><img src="icons8-shopping-cart.gif" alt=""></div>
+    <div><img src="resorces/icons8-shopping-cart.gif" alt=""></div>
     <br><p>Added in cart.</p>
   </div>
   <div class="loading_screen" id="purchecing">
-    <div><img src="Order Placed.gif" alt=""></div>
+    <div><img src="resorces/Order Placed.gif" alt=""></div>
     <br><p>Order Placing...</p>
   </div>
 
@@ -187,4 +192,6 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="logics/sending emal.js"></script>
 <script src="logics/load_page.js" ></script>
+<script type="text/javascript" src="logics/prodoct_detials.js"></script>
+
 </html>
