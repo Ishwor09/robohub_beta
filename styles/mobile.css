@@ -83,6 +83,8 @@ header h1{
     section {
       padding: 10px;
       text-align: center;
+  justify-items: center;
+  border-bottom: 3px orangered solid;
     }
 
     .btn {
@@ -206,14 +208,15 @@ header h1{
 
 .more_info{
   padding: 50px;
-  height: 38pc;
-  width: 15pc;
+  padding-left: 2pc;
+  height: 60%;
+  width: 50%;
   border-radius: 20px;
   background-color: white;
   align-self: center;
   justify-self: center;
   position: fixed;
-  top: 5%;
+  top: 10%;
   transition: all 1s;
  overflow-y: scroll; /* vertical scroll */
   overflow-x: hidden; /* hide horizontal scroll */
@@ -232,10 +235,12 @@ header h1{
       transform: scale(1);       /* zoom effect */
 }
 .main_img{
-  height: 17pc;
+  height: 14pc;
   width: 14pc;
+  margin-top: 5pc;
 }
 .more_info #texts{
+  margin-top: 5pc;
   margin: 5;
 }
 .item_infos{
@@ -402,11 +407,11 @@ transition: background 0.2s ease;
 
 
 #orderForm {
-  width: 300px;
-  height: 500px;
+  width: 60%;
+  height: 70%;
   margin: 20px auto;
   padding: 30px;
-    padding-top: 100px;
+    padding-top: 15px;
   border: 2px solid #ff8800;
   border-radius: 20px;
   background: #fff7f0;
@@ -427,8 +432,8 @@ transition: background 0.2s ease;
 
 #orderForm h2 {
   text-align: center;
-  color: #ff6600;
-  font-weight: bolder;
+  color: black;
+  font-weight:900;
   font-size: 25px;
 }
 
@@ -437,7 +442,8 @@ transition: background 0.2s ease;
   text-align: left;
   display: block;
   margin-top: 10px;
-  font-size: 22px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 
@@ -450,23 +456,24 @@ transition: background 0.2s ease;
   padding: 8px;
   margin-top: 5px;
   height: 20px;
-  font-size: 18px;
+  font-size: 19px;
+  font-weight: bold;
 
   border: 1px solid #ccc;
   border-radius: 15px;
 }
 #orderForm select{
     height: 50px;
-
 }
 .payment-options {
   margin-top: 10px;
 }
 
 #orderForm button {
-  margin-top: 15px;
+  margin-top: 3pc;
   width: 50%;
-  height: 30%;
+  height: 40px;
+  
   padding: 10px;
   background: darkblue;
   color: white;
@@ -486,8 +493,6 @@ transition: background 0.2s ease;
 #grand_total{
   font-size: 70px;
   font-weight: bolder;
-  margin-left: 55px;
-
 }
 
 #cross_order_form{
@@ -497,13 +502,16 @@ transition: background 0.2s ease;
 }
 #cross_order_form button{
     background: #fff7f0;
-    position: fixed;
+    position: sticky;
     width: 352px;
     height: 10%;
     left: 1pc;
     top: 4.8pc;
     justify-items: right;
     text-align: right;
+    margin: 0;
+    margin-bottom: 2pc;
+
 
 }
 #cross_order_form button:hover{
