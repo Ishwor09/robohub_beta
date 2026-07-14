@@ -1,6 +1,14 @@
 
 
-
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    
+  }
+  if (event.key === "Escape") {
+hideMoreInfo();
+hidecart();
+  }
+});
 function product(index){
   checkNet();
     document.body.style.overflow = "hidden";
@@ -237,3 +245,24 @@ function toTitleCase(str) {
     return false;
   }
 }
+
+const texts = document.querySelectorAll('.text');
+  let index = 0;
+
+  function showNextText() {
+    // 1. Mark current active as exiting
+    const currentText = texts[index];
+    currentText.classList.remove('active');
+    currentText.classList.add('exit');
+
+    // Remove the exit class after animation finishes so it resets at the bottom
+    setTimeout(() => {
+      currentText.classList.remove('exit');
+    }, 600); 
+
+    // 2. Move to next text
+    index = (index + 1) % texts.length;
+    texts[index].classList.add('active');
+  }
+
+  setInterval(showNextText, 2500); // change every 2.5 seconds
