@@ -10,17 +10,14 @@
 
    }
     header {
-  background-color: #ff7f00;
+  background-color: #0A1F44;
   color: white;
   padding: 20px;
-  display: flex;              /* enable flexbox */
-  align-items: center;        /* vertically center items */
-  justify-content: center;    /* center text horizontally */
+  display: flex;   
+  height: 350px;           /* enable flexbox */
+  align-items: top;        /* vertically center items */
+  justify-content: left;    /* center text horizontally */
   position: relative;         /* allow logo positioning */
-}
-header h1{
-  margin-right: 2pc;
-  font-size: 3pc;
 }
 
 .header-text {
@@ -28,6 +25,37 @@ header h1{
   margin-top: 10px;     /* add spacing below logo if needed */
 
 }
+
+.header-text {
+  
+  text-align: left;   /* center text */
+    overflow: hidden;
+  margin-top: 90px;     /* add spacing below logo if needed */
+}
+
+
+  .text {
+    position: absolute;
+    width: 100%;
+    text-align: left;
+    font-size: 3.5pc;
+    font-weight: 600;
+    opacity: 0;
+    /* Starts slightly below, waiting to transition up */
+    transform: translateY(30px); 
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .text.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional: Moves the exiting text UPWARDS for a cleaner exit animation */
+  .text.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 
 .header-text h1 {
   margin: 0;            /* remove default margin */
@@ -42,9 +70,12 @@ header h1{
 
     nav {
       height: 1.5pc;
-      background-color: #ff9933;
+      background-color:#0A1F44;
       padding: 10px;
       padding-top: 1.2pc;
+      border-bottom: white 1px solid;
+      
+      margin-bottom: 5px;
       text-align: center;
        position: fixed;       /* keeps nav bar fixed at top */
   top: 3px;                /* stick to very top */
@@ -60,8 +91,10 @@ header h1{
 
 #logo {
   position: absolute;
+    border: #0A1F44 solid 8px ;
+  border-radius: 20px;
   left: -10px;   /* logo pinned left */
-  height: 80px; /* adjust size */
+  height: 60px; /* adjust size */
   top: -30px;
 }
 
@@ -81,7 +114,7 @@ header h1{
 }
 
     section {
-      padding: 10px;
+      padding: 30px;
       text-align: center;
   justify-items: center;
   border-bottom: 3px orangered solid;
@@ -102,7 +135,7 @@ header h1{
     }
 
     footer {
-      background-color: #ff7f00;
+      background-color: #0A1F44;
       color: white;
       text-align: center;
       padding: 15px;
@@ -208,15 +241,19 @@ header h1{
 
 .more_info{
   padding: 50px;
-  padding-left: 2pc;
-  height: 60%;
-  width: 50%;
+  padding-left: 4pc;
+  /* height: 60%;
+  width: 50%; */
+  height: 79%;
+  width: 60%;
   border-radius: 20px;
   background-color: white;
   align-self: center;
   justify-self: center;
   position: fixed;
-  top: 10%;
+    /* top: 10%; */
+
+  top: 5%;
   transition: all 1s;
  overflow-y: scroll; /* vertical scroll */
   overflow-x: hidden; /* hide horizontal scroll */
@@ -237,7 +274,10 @@ header h1{
 .main_img{
   height: 14pc;
   width: 14pc;
-  margin-top: 5pc;
+    margin-top: 1pc;
+
+  margin-bottom: 1pc;
+  border-radius: 10px;
 }
 .more_info #texts{
   margin-top: 5pc;
@@ -407,8 +447,8 @@ transition: background 0.2s ease;
 
 
 #orderForm {
-  width: 60%;
-  height: 70%;
+  width: 70%;
+  height: 85%;
   margin: 20px auto;
   padding: 30px;
     padding-top: 15px;
@@ -572,10 +612,10 @@ transition: background 0.2s ease;
   display: none;
 }
 #stage_1{
-  display: block;
+  display: none;
 }
 #stage_2{
-  display: none;
+  display: block;
   text-align: center;
   justify-items: center;
   align-items: center;
@@ -592,7 +632,7 @@ transition: background 0.2s ease;
      font-size: 0px
   }
   to{
-     font-size: 120px;
+     font-size: 90px;
 
 
   }
@@ -620,7 +660,7 @@ transition: background 0.2s ease;
   color: orangered;
   top: 0;
   margin-top: 0;
- font-size: 23px;
+ font-size: 19px;
  opacity: 0;
  animation: notes_A 1s ease 1.5s forwards;
 }
