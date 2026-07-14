@@ -1,6 +1,7 @@
 
    body {
     display: block;
+    background-color: #F5F5F5;
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #fffaf3;
@@ -11,27 +12,51 @@
 
    }
     header {
-  background-color: #ff7f00;
+  background-color: #0A1F44;
   color: white;
-  padding: 20px;
+  height: 250px;
+  padding: 0;
   display: flex;              /* enable flexbox */
-  align-items: center;        /* vertically center items */
-  justify-content: center;    /* center text horizontally */
+  align-items: top;        /* vertically center items */
+  justify-content: left;    /* center text horizontally */
   position: relative;         /* allow logo positioning */
+  
 }
-header h1{
+/* header h1{
   margin-right: 2pc;
   font-size: 3pc;
-}
+} */
 
 .header-text {
   
   text-align: left;   /* center text */
     overflow: hidden;
-  
-  margin-top: 10px;     /* add spacing below logo if needed */
-
+  margin-top: 90px;     /* add spacing below logo if needed */
 }
+
+
+  .text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 3.2pc;
+    font-weight: 600;
+    opacity: 0;
+    /* Starts slightly below, waiting to transition up */
+    transform: translateY(30px); 
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .text.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional: Moves the exiting text UPWARDS for a cleaner exit animation */
+  .text.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 /* .header-text img {
   position: absolute;
   top: -15px; 
@@ -54,8 +79,9 @@ header h1{
 
 
     nav {
+      align-items: center;
       height: 1.5pc;
-      background-color: #ff9933;
+      background-color: #0A1F44;
       padding: 10px;
       padding-top: 1.2pc;
       text-align: center;
@@ -72,24 +98,32 @@ header h1{
 }
 
 #logo {
+
   position: absolute;
-  left: 20px;   /* logo pinned left */
-  height: 60px; /* adjust size */
+  border: #0A1F44 solid 10px ;
+  border-radius: 20px;
+  top: -25px;
+  left: 10px;   /* logo pinned left */
+  height: 45px; /* adjust size */
 }
 
 .nav-links {
   display: flex;
-  gap: 50px; /* spacing between links */
+
+  gap: 20px; /* spacing between links */
 }
 
 .nav-links a {
+  font-size: 13px;
   color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: 50ms color ease;
+  transition: 50ms all ease;
 }
 .nav-links a:hover{
- color: black;
+ color: lightblue;
+    font-weight: 800;
+
 }
 
     section {
@@ -114,7 +148,7 @@ header h1{
     }
 
     footer {
-      background-color: #ff7f00;
+      background-color: #0A1F44;
       color: white;
       text-align: center;
       padding: 15px;
@@ -131,6 +165,7 @@ header h1{
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -144,16 +179,16 @@ header h1{
   border-right: orangered solid 2px;
   border-left: orangered solid 2px;
   height: 22pc;
-  width: 90%;
+  width: 95%;
   text-align: center;
-    padding: 15px;
+    padding: 25px;
     padding-bottom: 25px;
    gap: 20px;                 /* spacing between items */
   overflow-x: auto;          /* enable horizontal scroll */
   overflow-y: hidden;        /* prevent vertical scroll */
   scroll-behavior: smooth;   /* smooth scrolling */
   white-space: nowrap;       /* keep items in one line */
-`}
+}
 .showing_conteneer::-webkit-scrollbar {
   display: none;
 }
@@ -163,29 +198,29 @@ header h1{
   scrollbar-width: none;
 }
 .items {
-  width: 11pc;
-  height: 12pc;
+  width: 8pc;
+  height: 10pc;
   cursor: grab;
   transition: all 0.5S ease;
 }
 .items:hover{
-  width: 11.5pc;
-  height: 12.5pc;
+  width: 8.5pc;
+  height: 10.5pc;
 
 }
 .items_kept{
   margin-left: 0;
   margin-right: 20px;
-  width: 14pc;
-  height: 97%;
+  width: 10pc;
+  height: 90%;
   padding: 10px;
   border-radius: 15px;
   box-shadow: 1px 0px 15px orangered;
   flex: 0 0 auto;            /* prevent shrinking, keep items side by side */
 }
 .btn_item{
-  height: 2pc;
-  width: 5pc;
+  height: 1.5pc;
+  width: 4pc;
   background-color: blue;
   color: #fffaf3;
   border-radius: 15px ;
@@ -218,15 +253,16 @@ header h1{
 
 .more_info{
   padding: 50px;
-  height: 28pc;
-  width: 45pc;
+  height: 20pc;
+  width: 38pc;
   border-radius: 20px;
   background-color: white;
   align-self: center;
   justify-self: center;
   position: fixed;
-  top: 10%;
+  top: 3%;
   transition: all 1s;
+  overflow: hidden;
  
 }
 
@@ -234,8 +270,8 @@ header h1{
       transform: scale(1);       /* zoom effect */
 }
 .main_img{
-  height: 15pc;
-  width: 12pc;
+  height: 10pc;
+  width: 10pc;
 }
 .more_info #texts{
   margin: 5;
@@ -278,8 +314,8 @@ header h1{
 .loading_screen div{
     align-content: center;
 
- height: 9.5pc;
- width: 9pc;
+ height: 5.5pc;
+ width: 5pc;
  background-color: white;
 padding-top: 5px;
 
@@ -305,9 +341,9 @@ margin-bottom: 0;
 }
 
 #show_all{
-  padding: 20px;
+  padding: 10px;
   height: 100%;
-  width: 17pc;
+  width: 15pc;
   border-radius: 20px;
   background-color: white;
   align-self: center;
@@ -316,7 +352,7 @@ margin-bottom: 0;
   right: -400px;
     position: fixed;
   top: 0;
-  font-size: 15px;
+  font-size: 10px;
 
    transition: right 1s ease; /* smooth animation */
 }
@@ -326,14 +362,14 @@ margin-bottom: 0;
   border-bottom:black solid 1px;
   margin-top: 5px;
   padding: 5px;
-  width: 20pc;
+  width: 14pc;
 }
 
 
 .delet_itmes{
   font-size: 10px;
 float: right;
-margin-right: 5px;
+margin-right: 20px;
   }
 
 #viwe_cart.open{
@@ -370,18 +406,18 @@ margin-right: 5px;
 #price_show{
   padding: 0;
   padding-left: 80px;
-  font-weight: 900px;;
+  font-weight: 800px;;
 }
 #checkout{
   display: none;
   background-color: darkblue;
   color: #fffaf3;
-  width: 10pc;
+  width: 7pc;
    margin-top: 10%;
       margin-left: 7pc;
 
    border-radius: 30px;
-   font-size: 20px;
+   font-size: 14px;
    font-weight: bold;
    padding: 20px;
    padding-bottom: 10px;
@@ -414,11 +450,11 @@ transition: background 0.2s ease;
 
 
 #orderForm {
-  width: 750px;
+  width: 650px;
   height: 500px;
   margin: 20px auto;
   padding: 30px;
-    padding-top: 100px;
+    padding-top: 0;
   border: 2px solid #ff8800;
   border-radius: 20px;
   background: #fff7f0;
@@ -439,7 +475,7 @@ transition: background 0.2s ease;
 
 #orderForm h2 {
   text-align: center;
-  color: #ff6600;
+  color: black;
   font-weight: bolder;
   font-size: 25px;
 }
@@ -449,7 +485,8 @@ transition: background 0.2s ease;
   text-align: left;
   display: block;
   margin-top: 10px;
-  font-size: 22px;
+  font-size: 16px;
+  font-weight: bolder;
 }
 
 
@@ -462,7 +499,8 @@ transition: background 0.2s ease;
   padding: 8px;
   margin-top: 5px;
   height: 30px;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: bold;
 
   border: 1px solid #ccc;
   border-radius: 15px;
@@ -478,7 +516,7 @@ transition: background 0.2s ease;
 #orderForm button {
   margin-top: 15px;
   width: 20%;
-  height: 10%;
+  height: 50px;
   padding: 10px;
   background: darkblue;
   color: white;
@@ -661,8 +699,8 @@ overflow-y: scroll; /* vertical scroll */
   scrollbar-width: none;
 }
 #id_track{
-  font-size: 20px;
-  width: 120px;
+  font-size: 16px;
+  width: 100px;
   height: 30px;
   margin-bottom: 40px;
 }
@@ -670,10 +708,10 @@ overflow-y: scroll; /* vertical scroll */
 #get_order_list{
   border-radius: 20px;
   background: darkblue;
-  font-size: 20px;
+  font-size: 10px;
   color: #fff7f0;
-  width: 150px;
-  height: 50px;
+  width: 100px;
+  height: 30px;
   margin-bottom: 15px;
   transition: all 0.5s ease ;
 }
@@ -696,4 +734,5 @@ overflow-y: scroll; /* vertical scroll */
 }
 #noteNotFound{
   display: none;
+  font-size: 10px;
 }
