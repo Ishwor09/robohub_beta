@@ -1,6 +1,7 @@
 
    body {
     display: block;
+    background-color: #F5F5F5;
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #fffaf3;
@@ -11,27 +12,51 @@
 
    }
     header {
-  background-color: #ff7f00;
+  background-color: #0A1F44;
   color: white;
-  padding: 20px;
+  height: 250px;
+  padding: 0;
   display: flex;              /* enable flexbox */
-  align-items: center;        /* vertically center items */
-  justify-content: center;    /* center text horizontally */
+  align-items: top;        /* vertically center items */
+  justify-content: left;    /* center text horizontally */
   position: relative;         /* allow logo positioning */
+  
 }
-header h1{
+/* header h1{
   margin-right: 2pc;
   font-size: 3pc;
-}
+} */
 
 .header-text {
   
   text-align: left;   /* center text */
     overflow: hidden;
-  
-  margin-top: 10px;     /* add spacing below logo if needed */
-
+  margin-top: 90px;     /* add spacing below logo if needed */
 }
+
+
+  .text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 4pc;
+    font-weight: 600;
+    opacity: 0;
+    /* Starts slightly below, waiting to transition up */
+    transform: translateY(30px); 
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .text.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optional: Moves the exiting text UPWARDS for a cleaner exit animation */
+  .text.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 /* .header-text img {
   position: absolute;
   top: -15px; 
@@ -54,8 +79,9 @@ header h1{
 
 
     nav {
+      align-items: center;
       height: 1.5pc;
-      background-color: #ff9933;
+      background-color: #0A1F44;
       padding: 10px;
       padding-top: 1.2pc;
       text-align: center;
@@ -72,13 +98,18 @@ header h1{
 }
 
 #logo {
+
   position: absolute;
+  border: #0A1F44 solid 10px ;
+  border-radius: 20px;
+  top: -25px;
   left: 20px;   /* logo pinned left */
-  height: 60px; /* adjust size */
+  height: 55px; /* adjust size */
 }
 
 .nav-links {
   display: flex;
+
   gap: 50px; /* spacing between links */
 }
 
@@ -86,10 +117,12 @@ header h1{
   color: white;
   text-decoration: none;
   font-weight: bold;
-  transition: 50ms color ease;
+  transition: 50ms all ease;
 }
 .nav-links a:hover{
- color: black;
+ color: lightblue;
+    font-weight: 800;
+
 }
 
     section {
@@ -114,7 +147,7 @@ header h1{
     }
 
     footer {
-      background-color: #ff7f00;
+      background-color: #0A1F44;
       color: white;
       text-align: center;
       padding: 15px;
@@ -146,14 +179,16 @@ header h1{
   height: 22pc;
   width: 90%;
   text-align: center;
-    padding: 15px;
+    padding: 35px;
     padding-bottom: 25px;
+        padding-right: 55px;
+
    gap: 20px;                 /* spacing between items */
   overflow-x: auto;          /* enable horizontal scroll */
   overflow-y: hidden;        /* prevent vertical scroll */
   scroll-behavior: smooth;   /* smooth scrolling */
   white-space: nowrap;       /* keep items in one line */
-`}
+}
 .showing_conteneer::-webkit-scrollbar {
   display: none;
 }
