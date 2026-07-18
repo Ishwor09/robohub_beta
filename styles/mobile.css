@@ -1,4 +1,5 @@
    body {
+    width: 100%;
     display: block;
       margin: 0;
       font-family: Arial, sans-serif;
@@ -14,7 +15,8 @@
   color: white;
   padding: 20px;
   display: flex;   
-  height: 350px;           /* enable flexbox */
+  height: 350px;  
+  width: 100%;         /* enable flexbox */
   align-items: top;        /* vertically center items */
   justify-content: left;    /* center text horizontally */
   position: relative;         /* allow logo positioning */
@@ -35,6 +37,7 @@
 
 
   .text {
+   
     position: absolute;
     width: 100%;
     text-align: left;
@@ -241,11 +244,11 @@
 
 .more_info{
   padding: 50px;
-  padding-left: 4pc;
+  padding-left: 1pc;
   /* height: 60%;
   width: 50%; */
   height: 79%;
-  width: 60%;
+  width: 70%;
   border-radius: 20px;
   background-color: white;
   align-self: center;
@@ -272,8 +275,8 @@
       transform: scale(1);       /* zoom effect */
 }
 .main_img{
-  height: 14pc;
-  width: 14pc;
+  height: 18pc;
+  width: 18pc;
     margin-top: 1pc;
 
   margin-bottom: 1pc;
@@ -288,6 +291,11 @@
     font-size: 20px;
 }
 #texts{
+
+   margin-top: 2.5pc;
+  border-top: #0A1F44 5px solid;
+    padding-top: 3pc;
+ 
       width: 100%;       /* fixed width */
   height: 150px;      /* fixed height */
   padding: 4px;
