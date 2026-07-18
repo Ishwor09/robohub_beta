@@ -1,0 +1,19 @@
+.items_kept {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  overflow: hidden; /* ensures ribbon doesn't spill */
+}
+
+.offer-ribbon {
+  position: absolute;
+  top: 10px;
+  left: -30px;
+  background: linear-gradient(45deg, #ff0000, #cc0000);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 40px;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
