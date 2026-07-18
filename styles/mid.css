@@ -281,6 +281,10 @@
     font-size: 20px;
 }
 #texts{
+  margin-top: 2.5pc;
+  border-top: #0A1F44 5px solid;
+    padding-top: 2.5pc;
+ 
       width: 100%;       /* fixed width */
   height: 150px;      /* fixed height */
   padding: 4px;
