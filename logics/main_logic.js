@@ -9,13 +9,13 @@ hideMoreInfo();
 hidecart();
   }
 });
-function product(index){
-  checkNet();
-    document.body.style.overflow = "hidden";
-    document.querySelector('#more_info_id').style = "display: block;";
-     document.querySelector('#more_info_id').innerHTML = info_notes[index];
-       document.getElementById("more_info_id").classList.add("show");
-}
+// function product(index){
+//   checkNet();
+//     document.body.style.overflow = "hidden";
+//     document.querySelector('#more_info_id').style = "display: block;";
+//      document.querySelector('#more_info_id').innerHTML = info_notes[index];
+//        document.getElementById("more_info_id").classList.add("show");
+// }
 function hideMoreInfo(){
   document.querySelector('#more_info_id').style = "display: none;";
   document.body.style.overflow = "auto";
