@@ -19,10 +19,11 @@ function sendEmail(trackCode) {
 
 
 
+    updateDataAndTime();
 
   emailjs.send("service_pwffi3l", "template_5piuag7", {
     title: orderStart,
-    time: new Date().toLocaleTimeString(),
+    time: bsDate+time,
     message: recodMsg,
     email: buyerEmail
   })
@@ -69,10 +70,11 @@ recodMsg += "We’re sorry to see you cancel, but we hope to serve you again in 
 
 
 
+        updateDataAndTime();
 
   emailjs.send("service_pwffi3l", "template_5piuag7", {
     title: orderStatus_diloc[3],
-    time: new Date().toLocaleTimeString(),
+    time: bsDate+time,
     message: recodMsg,
     email: viwerEmail
   })
