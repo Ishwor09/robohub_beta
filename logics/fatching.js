@@ -56,8 +56,11 @@ window.sendingDatas = function() {
     console.log("Data fetching..");
 
   let order_code = generateCode()+buyerPhone.slice(-4);
-
+    updateDataAndTime();
   const userData = {
+    sku: items_suk,
+    date: bsDate,
+    time: time,
     name: toTitleCase(buyerName),
     shippingfee: delivery_fee ,
     finalCost: grandTotal,
@@ -189,7 +192,7 @@ if (childObj.disc_price > 0){
 
 
 bagRecord += "<button class='btn_item'>Inquiry</button>";
-bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+childObj+"\","+childObj.main_price+")' class='btn_item'>Add to Cart</button></div>";
+bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+key+"\","+childObj.main_price+")' class='btn_item'>Add to Cart</button></div>";
 
           
 
@@ -212,7 +215,7 @@ bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+childO
 }
 
               kitsRecord +="<button class=\"btn_item\">Inqury</button>";
-              kitsRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+childObj+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
+              kitsRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+key+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
             
           
 
@@ -235,7 +238,7 @@ bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+childO
 }
 
               toolsRecord +="<button class=\"btn_item\">Inqury</button>";
-              toolsRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+childObj+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
+              toolsRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+key+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
             
           
 
@@ -259,7 +262,7 @@ bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+childO
 }
 
               projectRecord +="<button class=\"btn_item\">Inqury</button>";
-              projectRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+childObj+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
+              projectRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+key+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
             
           
 
@@ -282,7 +285,7 @@ bagRecord += "<button onclick='addToCart(\""+childObj.productName+"\",\""+childO
 }
 
               electricRecord +="<button class=\"btn_item\">Inqury</button>";
-              electricRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+childObj+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
+              electricRecord +="<button onclick='addToCart(\""+childObj.productName+"\",\""+key+"\","+childObj.main_price+")' class=\"btn_item\">Add to Cart</button></div>";      
             
           
 
