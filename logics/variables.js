@@ -11,7 +11,8 @@ let orderStatus_diloc = [
   "on_hold",
   "failed"
 ];
-
+    let bsDate;
+let time;
 let Numbers = [];
 let items_name = [];
 let items_suk = [];
