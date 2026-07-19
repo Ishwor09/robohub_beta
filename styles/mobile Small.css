@@ -611,10 +611,10 @@ transition: background 0.2s ease;
   display: none;
 }
 #stage_1{
-  display: none;
+  display: block;
 }
 #stage_2{
-  display: block;
+  display: none;
   text-align: center;
   justify-items: center;
   align-items: center;
