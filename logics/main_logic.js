@@ -9,6 +9,47 @@ hideMoreInfo();
 hidecart();
   }
 });
+
+async function loadBSDate() {
+      try {
+        const response = await fetch("https://english.hamropatro.com/");
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        const bsElement = doc.querySelector("span.nep");
+        if (bsElement) {
+          return bsElement.textContent.trim();
+        } else {
+          console.log("Date not found");
+          return null;
+        }
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    }
+
+    // Use async/await properly
+function updateDataAndTime(){
+  (async () => {
+       bsDate = await loadBSDate();
+      
+    })();
+  const now = new Date();
+
+      // Format with 12-hour clock and AM/PM
+      const formatted = now.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true
+      });
+      time = formatted;
+    
+  }
+    updateDataAndTime();
+
 // function product(index){
 //   checkNet();
 //     document.body.style.overflow = "hidden";
@@ -124,8 +165,9 @@ priceing.splice(items,1);
 
 
 async function addToCart(name, suk, price){
+      updateDataAndTime();
 
-
+  console.log(time);
         document.getElementById("adding_cart").style = "display: flex;";
         await delay(500);
       
