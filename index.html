@@ -1,65 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>STEAM & Robotics Project Tracker</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Configure Tailwind Dark Mode Strategy
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
   <!-- jsPDF and jsPDF-AutoTable for PDF Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
   <style>
     .modal { transition: opacity 0.25s ease; }
-    body { background-color: #f3f4f6; }
-    /* Fix for smooth scrolling inside modal on mobile devices */
     .overflow-y-auto { -webkit-overflow-scrolling: touch; }
   </style>
+
+  <!-- Prevent theme flicker on load -->
+  <script>
+    if (localStorage.getItem('color-theme') === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
-<body class="text-gray-800 font-sans min-h-screen pb-12">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans min-h-screen pb-12 transition-colors duration-200">
 
   <!-- Header -->
-  <header class="bg-indigo-600 text-white shadow-md p-4 sm:p-5 max-w-4xl mx-auto my-4 sm:my-6 rounded-none sm:rounded-xl flex justify-between items-center">
+  <header class="bg-indigo-600 dark:bg-indigo-900 text-white shadow-md p-4 sm:p-5 max-w-4xl mx-auto my-4 sm:my-6 rounded-none sm:rounded-xl flex justify-between items-center">
     <div class="pr-2">
-      <h1 class="text-xl sm:text-2xl font-bold leading-tight">Sachin STEAM & Robotics Tracker</h1>
+      <h1 class="text-xl sm:text-2xl font-bold leading-tight">STEAM & Robotics Tracker</h1>
       <p class="text-xs text-indigo-200 mt-0.5">Record and manage class project progress</p>
     </div>
-    <!-- Gear Icon button for Admin Setup -->
-    <button id="openGearModalBtn" class="p-2 sm:p-2.5 hover:bg-indigo-700 bg-indigo-700 sm:bg-transparent rounded-full transition focus:outline-none flex-shrink-0" title="Manage Schools, Classes & Sections">
-      <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-      </svg>
-    </button>
+
+    <!-- Header Actions (Dark Mode Toggle & Gear Icon) -->
+    <div class="flex items-center gap-2">
+      <!-- Dark/Light Mode Switcher Button -->
+      <button id="themeToggleBtn" class="p-2 sm:p-2.5 bg-indigo-700 dark:bg-indigo-800 hover:bg-indigo-800 rounded-full transition focus:outline-none" title="Toggle Light/Dark Theme">
+        <!-- Sun Icon (shown in dark mode) -->
+        <svg id="themeToggleSunIcon" class="w-5 h-5 sm:w-6 sm:h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+        </svg>
+        <!-- Moon Icon (shown in light mode) -->
+        <svg id="themeToggleMoonIcon" class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+        </svg>
+      </button>
+
+      <!-- Gear Icon Button for Admin Setup -->
+      <button id="openGearModalBtn" class="p-2 sm:p-2.5 bg-indigo-700 dark:bg-indigo-800 hover:bg-indigo-800 rounded-full transition focus:outline-none flex-shrink-0" title="Manage Schools, Classes & Sections">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <!-- Main Container -->
   <main class="max-w-4xl mx-auto space-y-6 px-3 sm:px-4">
     
     <!-- Project Entry Form -->
-    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-100">
-      <h2 class="text-lg sm:text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Record Project Status</h2>
+    <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-colors">
+      <h2 class="text-lg sm:text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200 border-b dark:border-gray-700 pb-2">Record Project Status</h2>
       <form id="projectStatusForm" class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           <!-- Select School -->
           <div>
-            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select School</label>
-            <select id="schoolSelect" required class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Select School</label>
+            <select id="schoolSelect" required class="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 sm:p-2.5 text-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500">
               <option value="">-- Choose School --</option>
             </select>
           </div>
 
           <!-- Select Class -->
           <div>
-            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select Class</label>
-            <select id="classSelect" required disabled class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 focus:ring-2 focus:ring-indigo-500">
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Select Class</label>
+            <select id="classSelect" required disabled class="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500">
               <option value="">-- Choose Class --</option>
             </select>
           </div>
 
           <!-- Select Section -->
           <div>
-            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select Section</label>
-            <select id="sectionSelect" required disabled class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 focus:ring-2 focus:ring-indigo-500">
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Select Section</label>
+            <select id="sectionSelect" required disabled class="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500">
               <option value="">-- Choose Section --</option>
             </select>
           </div>
@@ -67,31 +96,31 @@
 
         <!-- Project Status Textarea -->
         <div>
-          <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Project Status & Notes</label>
-          <textarea id="projectStatusText" rows="4" required placeholder="Describe the current progress of the STEAM/Robotics project..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-indigo-500"></textarea>
+          <label class="block text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Project Status & Notes</label>
+          <textarea id="projectStatusText" rows="4" required placeholder="Describe the current progress of the STEAM/Robotics project..." class="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 text-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500"></textarea>
         </div>
 
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition shadow-md text-sm sm:text-base">
+        <button type="submit" class="w-full bg-indigo-600 dark:bg-indigo-700 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white font-medium py-3 rounded-lg transition shadow-md text-sm sm:text-base">
           Submit Project Status
         </button>
       </form>
     </div>
 
     <!-- Recent Submissions & Filtering Section -->
-    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 mb-8 space-y-4">
-      <div class="flex flex-col md:flex-row justify-between md:items-center gap-3 border-b pb-3">
-        <h2 class="text-lg sm:text-xl font-semibold text-gray-700">Recorded Logs</h2>
+    <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 mb-8 space-y-4 transition-colors">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-3 border-b dark:border-gray-700 pb-3">
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-200">Recorded Logs</h2>
         
         <!-- Filter Controls & Export PDF -->
         <div class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
           <div class="flex items-center gap-2 w-full sm:w-auto">
-            <label class="text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Filter:</label>
-            <select id="filterSchoolSelect" class="w-full sm:w-auto border border-gray-300 rounded-lg p-2.5 sm:p-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+            <label class="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase whitespace-nowrap">Filter:</label>
+            <select id="filterSchoolSelect" class="w-full sm:w-auto border border-gray-300 dark:border-gray-600 rounded-lg p-2.5 sm:p-2 text-sm bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500">
               <option value="ALL">All Schools</option>
             </select>
           </div>
 
-          <button id="downloadPdfBtn" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2.5 sm:py-2 rounded-lg transition shadow flex items-center justify-center gap-1.5">
+          <button id="downloadPdfBtn" class="w-full sm:w-auto bg-emerald-600 dark:bg-emerald-700 hover:bg-emerald-700 dark:hover:bg-emerald-600 text-white text-sm font-medium px-4 py-2.5 sm:py-2 rounded-lg transition shadow flex items-center justify-center gap-1.5">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
             </svg>
@@ -102,46 +131,46 @@
 
       <!-- Logs List Container -->
       <div id="logsContainer" class="space-y-3">
-        <p class="text-gray-400 text-sm">Loading logs...</p>
+        <p class="text-gray-400 dark:text-gray-500 text-sm">Loading logs...</p>
       </div>
     </div>
   </main>
 
   <!-- Gear Admin Modal -->
-  <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-2 sm:p-4">
-    <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Manage Schools, Classes & Sections</h3>
-        <button id="closeGearModalBtn" class="text-gray-400 hover:text-gray-600 text-3xl font-bold p-1 leading-none">&times;</button>
+  <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-2 sm:p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6 text-gray-800 dark:text-gray-100 transition-colors">
+      <div class="flex justify-between items-center border-b dark:border-gray-700 pb-3">
+        <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-100">Manage Schools, Classes & Sections</h3>
+        <button id="closeGearModalBtn" class="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 text-3xl font-bold p-1 leading-none">&times;</button>
       </div>
 
       <!-- Add / Update School Form -->
-      <form id="adminSchoolForm" class="space-y-4 bg-gray-50 p-3 sm:p-4 rounded-lg border">
+      <form id="adminSchoolForm" class="space-y-4 bg-gray-50 dark:bg-gray-700/50 p-3 sm:p-4 rounded-lg border dark:border-gray-700">
         <input type="hidden" id="editSchoolId" value="" />
-        <h4 id="adminFormTitle" class="font-semibold text-indigo-700 text-sm sm:text-base">Add New School Setup</h4>
+        <h4 id="adminFormTitle" class="font-semibold text-indigo-700 dark:text-indigo-400 text-sm sm:text-base">Add New School Setup</h4>
         
         <div>
-          <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">School Name</label>
-          <input type="text" id="adminSchoolName" required placeholder="e.g. Green Valley High" class="w-full border rounded-lg p-2.5 sm:p-2 text-sm focus:ring-1 focus:ring-indigo-500">
+          <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase mb-1">School Name</label>
+          <input type="text" id="adminSchoolName" required placeholder="e.g. Green Valley High" class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-lg p-2.5 sm:p-2 text-sm focus:ring-1 focus:ring-indigo-500">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Class & Linked Sections Mapping</label>
+          <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase mb-1">Class & Linked Sections Mapping</label>
           <div id="classMappingContainer" class="space-y-3 sm:space-y-2">
             <!-- Dynamic rows will render here -->
           </div>
-          <button type="button" id="addClassRowBtn" class="mt-2 text-sm text-indigo-600 hover:underline font-medium">+ Add Another Class</button>
+          <button type="button" id="addClassRowBtn" class="mt-2 text-sm text-indigo-600 dark:text-indigo-400 hover:underline font-medium">+ Add Another Class</button>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2 pt-2">
-          <button type="submit" id="saveSchoolBtn" class="w-full sm:w-auto bg-indigo-600 text-white px-4 py-2.5 sm:py-2 rounded-md hover:bg-indigo-700 font-medium text-sm">Save Setup</button>
-          <button type="button" id="cancelEditBtn" class="w-full sm:w-auto bg-gray-300 text-gray-700 px-4 py-2.5 sm:py-2 rounded-md hover:bg-gray-400 font-medium text-sm hidden">Cancel Edit</button>
+          <button type="submit" id="saveSchoolBtn" class="w-full sm:w-auto bg-indigo-600 dark:bg-indigo-700 text-white px-4 py-2.5 sm:py-2 rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-600 font-medium text-sm">Save Setup</button>
+          <button type="button" id="cancelEditBtn" class="w-full sm:w-auto bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-4 py-2.5 sm:py-2 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 font-medium text-sm hidden">Cancel Edit</button>
         </div>
       </form>
 
       <!-- Existing Config List -->
       <div>
-        <h4 class="font-semibold text-gray-700 mb-2 text-sm sm:text-base">Existing Setups</h4>
+        <h4 class="font-semibold text-gray-700 dark:text-gray-200 mb-2 text-sm sm:text-base">Existing Setups</h4>
         <div id="schoolListContainer" class="space-y-3">
           <!-- Rendered existing setup items -->
         </div>
@@ -156,9 +185,36 @@
       getDatabase, ref, push, set, update, remove, onValue 
     } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+    // --- DARK MODE TOGGLE SCRIPT ---
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeToggleSunIcon = document.getElementById('themeToggleSunIcon');
+    const themeToggleMoonIcon = document.getElementById('themeToggleMoonIcon');
+
+    function updateThemeIcons() {
+      if (document.documentElement.classList.contains('dark')) {
+        themeToggleSunIcon.classList.remove('hidden');
+        themeToggleMoonIcon.classList.add('hidden');
+      } else {
+        themeToggleSunIcon.classList.add('hidden');
+        themeToggleMoonIcon.classList.remove('hidden');
+      }
+    }
+    updateThemeIcons();
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+      updateThemeIcons();
+    });
+
     // --- YOUR FIREBASE CONFIGURATION ---
     const firebaseConfig = {
-       apiKey: "AIzaSyBb3FKOHdxebb6n_YEL7KnvNkoQBvtkjow",
+      apiKey: "AIzaSyBb3FKOHdxebb6n_YEL7KnvNkoQBvtkjow",
     authDomain: "school-mannage.firebaseapp.com",
     databaseURL: "https://school-mannage-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "school-mannage",
@@ -206,14 +262,14 @@
     openGearModalBtn.addEventListener('click', () => { adminModal.classList.remove('hidden'); });
     closeGearModalBtn.addEventListener('click', () => { resetAdminForm(); adminModal.classList.add('hidden'); });
 
-    // Responsive Dynamic Class-Section row builder inside Modal
+    // Dynamic Class-Section row builder inside Modal
     function createClassRow(className = '', sectionsStr = '') {
       const row = document.createElement('div');
-      row.className = 'flex flex-col sm:flex-row gap-2 items-stretch sm:items-center class-mapping-row bg-white sm:bg-transparent p-2.5 sm:p-0 rounded-lg border sm:border-0';
+      row.className = 'flex flex-col sm:flex-row gap-2 items-stretch sm:items-center class-mapping-row bg-white dark:bg-gray-700 sm:bg-transparent dark:sm:bg-transparent p-2.5 sm:p-0 rounded-lg border dark:border-gray-600 sm:border-0';
       row.innerHTML = `
-        <input type="text" placeholder="Class (e.g. Class 5)" value="${className}" required class="w-full sm:w-1/2 border rounded-md p-2 text-sm class-input">
-        <input type="text" placeholder="Sections comma separated (e.g. A, B)" value="${sectionsStr}" required class="w-full sm:w-1/2 border rounded-md p-2 text-sm section-input">
-        <button type="button" class="remove-row-btn text-red-500 hover:text-red-700 font-bold px-2 py-1 text-right sm:text-center text-xs sm:text-base self-end sm:self-auto">&times; Remove</button>
+        <input type="text" placeholder="Class (e.g. Class 5)" value="${className}" required class="w-full sm:w-1/2 border dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-md p-2 text-sm class-input">
+        <input type="text" placeholder="Sections comma separated (e.g. A, B)" value="${sectionsStr}" required class="w-full sm:w-1/2 border dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 rounded-md p-2 text-sm section-input">
+        <button type="button" class="remove-row-btn text-red-500 dark:text-red-400 hover:text-red-700 font-bold px-2 py-1 text-right sm:text-center text-xs sm:text-base self-end sm:self-auto">&times; Remove</button>
       `;
       row.querySelector('.remove-row-btn').addEventListener('click', () => row.remove());
       return row;
@@ -223,7 +279,7 @@
       classMappingContainer.appendChild(createClassRow());
     });
 
-    // Realtime Listener for Schools List from Realtime DB
+    // Realtime Listener for Schools List
     if (db) {
       const schoolsRef = ref(db, 'schools');
       onValue(schoolsRef, (snapshot) => {
@@ -243,11 +299,9 @@
 
     // Populate Main and Filter Dropdowns
     function populateSchoolDropdowns() {
-      // 1. Form dropdown
       const currentSelected = schoolSelect.value;
       schoolSelect.innerHTML = '<option value="">-- Choose School --</option>';
       
-      // 2. Filter dropdown
       const currentFilter = filterSchoolSelect.value;
       filterSchoolSelect.innerHTML = '<option value="ALL">All Schools</option>';
 
@@ -310,7 +364,7 @@
       sectionSelect.disabled = true;
     }
 
-    // Save/Update Admin School Configuration in Realtime DB
+    // Save/Update Admin School Setup
     adminSchoolForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -343,24 +397,24 @@
     function renderAdminSchoolList() {
       schoolListContainer.innerHTML = '';
       if (schoolsCache.length === 0) {
-        schoolListContainer.innerHTML = '<p class="text-gray-400 text-sm">No schools added yet.</p>';
+        schoolListContainer.innerHTML = '<p class="text-gray-400 dark:text-gray-500 text-sm">No schools added yet.</p>';
         return;
       }
 
       schoolsCache.forEach(school => {
         const item = document.createElement('div');
-        item.className = 'border p-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-white';
+        item.className = 'border dark:border-gray-700 p-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-white dark:bg-gray-700/50';
         
         let classSummary = school.classes ? school.classes.map(c => `${c.className} (${c.sections.join(', ')})`).join(' | ') : '';
 
         item.innerHTML = `
           <div>
-            <h5 class="font-bold text-gray-800 text-sm sm:text-base">${school.name}</h5>
-            <p class="text-xs text-gray-500">${classSummary || 'No classes added'}</p>
+            <h5 class="font-bold text-gray-800 dark:text-gray-100 text-sm sm:text-base">${school.name}</h5>
+            <p class="text-xs text-gray-500 dark:text-gray-400">${classSummary || 'No classes added'}</p>
           </div>
           <div class="flex gap-3 self-end sm:self-auto">
-            <button class="edit-btn text-blue-600 text-xs sm:text-sm font-semibold hover:underline">Edit</button>
-            <button class="delete-btn text-red-600 text-xs sm:text-sm font-semibold hover:underline">Delete</button>
+            <button class="edit-btn text-blue-600 dark:text-blue-400 text-xs sm:text-sm font-semibold hover:underline">Edit</button>
+            <button class="delete-btn text-red-600 dark:text-red-400 text-xs sm:text-sm font-semibold hover:underline">Delete</button>
           </div>
         `;
 
@@ -409,7 +463,7 @@
     
     resetAdminForm();
 
-    // Submit Project Status Entry to Realtime Database
+    // Submit Project Status
     projectStatusForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -437,7 +491,7 @@
       }
     });
 
-    // Realtime Listener for Recorded Project Logs
+    // Realtime Listener for Project Logs
     if (db) {
       const logsRef = ref(db, 'project_statuses');
       onValue(logsRef, (snapshot) => {
@@ -453,10 +507,8 @@
       });
     }
 
-    // Filter Change Handler
     filterSchoolSelect.addEventListener('change', renderFilteredLogs);
 
-    // Render Logs based on active Filter
     function getFilteredLogs() {
       const selectedSchoolId = filterSchoolSelect.value;
       if (selectedSchoolId === 'ALL') {
@@ -470,7 +522,7 @@
       logsContainer.innerHTML = '';
 
       if (filtered.length === 0) {
-        logsContainer.innerHTML = '<p class="text-gray-400 text-sm">No project statuses recorded for this selection.</p>';
+        logsContainer.innerHTML = '<p class="text-gray-400 dark:text-gray-500 text-sm">No project statuses recorded for this selection.</p>';
         return;
       }
 
@@ -478,19 +530,19 @@
         const dateStr = log.createdAt ? new Date(log.createdAt).toLocaleString() : 'Just now';
 
         const card = document.createElement('div');
-        card.className = 'border-l-4 border-indigo-500 bg-gray-50 p-3 sm:p-4 rounded-r-lg space-y-1';
+        card.className = 'border-l-4 border-indigo-500 dark:border-indigo-400 bg-gray-50 dark:bg-gray-700/60 p-3 sm:p-4 rounded-r-lg space-y-1';
         card.innerHTML = `
-          <div class="flex flex-col sm:flex-row justify-between sm:items-center text-xs text-gray-500 gap-0.5">
-            <span class="font-semibold text-indigo-600 sm:text-sm">${log.schoolName} &bull; ${log.className} (${log.section})</span>
+          <div class="flex flex-col sm:flex-row justify-between sm:items-center text-xs text-gray-500 dark:text-gray-400 gap-0.5">
+            <span class="font-semibold text-indigo-600 dark:text-indigo-400 sm:text-sm">${log.schoolName} &bull; ${log.className} (${log.section})</span>
             <span>${dateStr}</span>
           </div>
-          <p class="text-gray-800 text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">${log.statusText}</p>
+          <p class="text-gray-800 dark:text-gray-100 text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">${log.statusText}</p>
         `;
         logsContainer.appendChild(card);
       });
     }
 
-    // --- PDF Export Handler ---
+    // Export PDF Report
     downloadPdfBtn.addEventListener('click', () => {
       const filtered = getFilteredLogs();
       if (filtered.length === 0) {
@@ -503,17 +555,15 @@
 
       const selectedSchoolText = filterSchoolSelect.options[filterSchoolSelect.selectedIndex].text;
 
-      // PDF Title Header
       doc.setFontSize(16);
       doc.setTextColor(79, 70, 229);
-      doc.text("School Project Report by Sachin", 14, 15);
+      doc.text("STEAM & Robotics Class Project Status Report", 14, 15);
       
       doc.setFontSize(10);
       doc.setTextColor(100);
       doc.text(`School Scope: ${selectedSchoolText}`, 14, 22);
       doc.text(`Generated Date: ${new Date().toLocaleString()}`, 14, 27);
 
-      // Prepare Table Data
       const tableRows = filtered.map((log, index) => [
         index + 1,
         log.schoolName || 'N/A',
@@ -523,7 +573,6 @@
         log.statusText || ''
       ]);
 
-      // Render AutoTable
       doc.autoTable({
         startY: 32,
         head: [['#', 'School', 'Class', 'Section', 'Date & Time', 'Project Status Details']],
@@ -541,7 +590,6 @@
         styles: { fontSize: 8, cellPadding: 2.5, overflow: 'linebreak' }
       });
 
-      // Save PDF
       const filename = `STEAM_Project_Report_${selectedSchoolText.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
       doc.save(filename);
     });
