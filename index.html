@@ -1,210 +1,550 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>merh</title>
-<link rel="stylesheet" href="styles/main.css" media="screen and (min-width: 1024px)">
-<link rel="stylesheet" href="styles/mid.css" media="screen and (min-width: 768px) and (max-width: 1023px)">
-<link rel="stylesheet" href="styles/mobile.css" media="screen and (max-width: 767px)">
-<!-- <link rel="stylesheet" href="styles/mobile Small.css" media="screen and (max-width: 460px)"> -->
-<link rel="stylesheet" href="styles/comman.css" >
-
+  <title>STEAM & Robotics Project Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- jsPDF and jsPDF-AutoTable for PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    .modal { transition: opacity 0.25s ease; }
+    body { background-color: #f3f4f6; }
+    /* Fix for smooth scrolling inside modal on mobile devices */
+    .overflow-y-auto { -webkit-overflow-scrolling: touch; }
+  </style>
 </head>
-<body>
-  
+<body class="text-gray-800 font-sans min-h-screen pb-12">
 
-  <nav>
-  <div class="nav-container">
-    <img id="logo" src="resorces/newLogo.jpeg" alt="Logo">
-    <div class="nav-links">
-      <a href="#bag">Components</a>
-      <a href="#kits">Kits</a>
-      <a href="#tools">Tools</a>
-      <a href="#project">Project Kits</a>
-       <a href="#electic">Eletrical</a>
-      <a href="#about">About us</a>
-
+  <!-- Header -->
+  <header class="bg-indigo-600 text-white shadow-md p-4 sm:p-5 max-w-4xl mx-auto my-4 sm:my-6 rounded-none sm:rounded-xl flex justify-between items-center">
+    <div class="pr-2">
+      <h1 class="text-xl sm:text-2xl font-bold leading-tight">Sachin +STEAM & Robotics Tracker</h1>
+      <p class="text-xs text-indigo-200 mt-0.5">Record and manage class project progress</p>
     </div>
-    <button onclick="showcart()" class="cart-btn">Check Cart</button>
-  </div>
-</nav>
-
-  <header>
-     <div class="header-text" >
-      <div class="text active">
-        Welcome to Robo Maker's Hub
-      </div>
-       <div class="text">DIY Electronic Components</div>
-  <div class="text">IoT & Automation Tools</div>
-  <div class="text">Learn, Build, Innovate!</div>
-      <!-- <img src="resorces/multi flag.png" alt=""> -->
-    
-  </div>
+    <!-- Gear Icon button for Admin Setup -->
+    <button id="openGearModalBtn" class="p-2 sm:p-2.5 hover:bg-indigo-700 bg-indigo-700 sm:bg-transparent rounded-full transition focus:outline-none flex-shrink-0" title="Manage Schools, Classes & Sections">
+      <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      </svg>
+    </button>
   </header>
 
-  <section id="bag" >
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto space-y-6 px-3 sm:px-4">
     
-  </section>
-<div id="more_info_id" tabindex="0">
-  
-</div>
+    <!-- Project Entry Form -->
+    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-100">
+      <h2 class="text-lg sm:text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Record Project Status</h2>
+      <form id="projectStatusForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+          <!-- Select School -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select School</label>
+            <select id="schoolSelect" required class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+              <option value="">-- Choose School --</option>
+            </select>
+          </div>
 
-<div id="viwe_cart" >
-  
-  <div id="show_all">
-    <button style="justify-self: right; margin-bottom: 20px;" onclick="hidecart()" >❌</button>
-    <div id="show_ordered_items">
-      <div id="enterCode">
-        <label style="font-size: 20px; font-weight: bold;">Enter your order ID: </label>
-        <input id="id_track" type="text" maxlength="8" style="text-transform: uppercase;"><br>
-        <button id="get_order_list" onclick="reCall()" >Check Order</button>
-     <p>By entering your order id which we provide in you email you can see you order status and details.</p>
-      <div id="noteNotFound">
-            <h3 >No Found Order ID 🥹<h4>It's may be wrong Order ID, Cancelled Order or Already Order was Completed <i>Check the mail if your order was compelted and want ot see order details. Our System will delet order ID automaticlly affter order Complete. You can request us also by contacting.</i> </h4></h3>
+          <!-- Select Class -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select Class</label>
+            <select id="classSelect" required disabled class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 focus:ring-2 focus:ring-indigo-500">
+              <option value="">-- Choose Class --</option>
+            </select>
+          </div>
+
+          <!-- Select Section -->
+          <div>
+            <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Select Section</label>
+            <select id="sectionSelect" required disabled class="w-full border border-gray-300 rounded-lg p-3 sm:p-2.5 text-sm bg-gray-50 focus:ring-2 focus:ring-indigo-500">
+              <option value="">-- Choose Section --</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Project Status Textarea -->
+        <div>
+          <label class="block text-xs sm:text-sm font-medium text-gray-600 mb-1">Project Status & Notes</label>
+          <textarea id="projectStatusText" rows="4" required placeholder="Describe the current progress of the STEAM/Robotics project..." class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-indigo-500"></textarea>
+        </div>
+
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition shadow-md text-sm sm:text-base">
+          Submit Project Status
+        </button>
+      </form>
+    </div>
+
+    <!-- Recent Submissions & Filtering Section -->
+    <div class="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-gray-100 mb-8 space-y-4">
+      <div class="flex flex-col md:flex-row justify-between md:items-center gap-3 border-b pb-3">
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-700">Recorded Logs</h2>
+        
+        <!-- Filter Controls & Export PDF -->
+        <div class="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <label class="text-xs font-semibold text-gray-600 uppercase whitespace-nowrap">Filter:</label>
+            <select id="filterSchoolSelect" class="w-full sm:w-auto border border-gray-300 rounded-lg p-2.5 sm:p-2 text-sm bg-white focus:ring-2 focus:ring-indigo-500">
+              <option value="ALL">All Schools</option>
+            </select>
+          </div>
+
+          <button id="downloadPdfBtn" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2.5 sm:py-2 rounded-lg transition shadow flex items-center justify-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Export PDF Report
+          </button>
+        </div>
+      </div>
+
+      <!-- Logs List Container -->
+      <div id="logsContainer" class="space-y-3">
+        <p class="text-gray-400 text-sm">Loading logs...</p>
       </div>
     </div>
+  </main>
 
-      <div id="data_gets">
-              
+  <!-- Gear Admin Modal -->
+  <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-2 sm:p-4">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[92vh] sm:max-h-[90vh] overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-lg sm:text-xl font-bold text-gray-800">Manage Schools, Classes & Sections</h3>
+        <button id="closeGearModalBtn" class="text-gray-400 hover:text-gray-600 text-3xl font-bold p-1 leading-none">&times;</button>
       </div>
 
+      <!-- Add / Update School Form -->
+      <form id="adminSchoolForm" class="space-y-4 bg-gray-50 p-3 sm:p-4 rounded-lg border">
+        <input type="hidden" id="editSchoolId" value="" />
+        <h4 id="adminFormTitle" class="font-semibold text-indigo-700 text-sm sm:text-base">Add New School Setup</h4>
+        
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">School Name</label>
+          <input type="text" id="adminSchoolName" required placeholder="e.g. Green Valley High" class="w-full border rounded-lg p-2.5 sm:p-2 text-sm focus:ring-1 focus:ring-indigo-500">
+        </div>
 
+        <div>
+          <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Class & Linked Sections Mapping</label>
+          <div id="classMappingContainer" class="space-y-3 sm:space-y-2">
+            <!-- Dynamic rows will render here -->
+          </div>
+          <button type="button" id="addClassRowBtn" class="mt-2 text-sm text-indigo-600 hover:underline font-medium">+ Add Another Class</button>
+        </div>
 
-    </div>
-    <div id="show_items">
-    
-    </div>
-    <div id="show_bill">
-        <h2><b>Total:   </b><h1 id="price_show">Rs. 0</h1></h2>
+        <div class="flex flex-col sm:flex-row gap-2 pt-2">
+          <button type="submit" id="saveSchoolBtn" class="w-full sm:w-auto bg-indigo-600 text-white px-4 py-2.5 sm:py-2 rounded-md hover:bg-indigo-700 font-medium text-sm">Save Setup</button>
+          <button type="button" id="cancelEditBtn" class="w-full sm:w-auto bg-gray-300 text-gray-700 px-4 py-2.5 sm:py-2 rounded-md hover:bg-gray-400 font-medium text-sm hidden">Cancel Edit</button>
+        </div>
+      </form>
 
+      <!-- Existing Config List -->
+      <div>
+        <h4 class="font-semibold text-gray-700 mb-2 text-sm sm:text-base">Existing Setups</h4>
+        <div id="schoolListContainer" class="space-y-3">
+          <!-- Rendered existing setup items -->
+        </div>
+      </div>
     </div>
-    <button id="checkout" onclick="checkOut()">Checkout</button>
+  </div>
+
+  <!-- Firebase Realtime Database Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { 
+      getDatabase, ref, push, set, update, remove, onValue 
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+    // --- YOUR FIREBASE CONFIGURATION ---
+    const firebaseConfig = {
+       apiKey: "AIzaSyBb3FKOHdxebb6n_YEL7KnvNkoQBvtkjow",
+    authDomain: "school-mannage.firebaseapp.com",
+    databaseURL: "https://school-mannage-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "school-mannage",
+    storageBucket: "school-mannage.firebasestorage.app",
+    messagingSenderId: "347216977117",
+    appId: "1:347216977117:web:36bb55da1664697afe0f34",
+    measurementId: "G-VTJCGZ3SYG"
+    };
+
+    let db;
+    try {
+      const app = initializeApp(firebaseConfig);
+      db = getDatabase(app);
+    } catch (err) {
+      console.error("Firebase initialization failed:", err);
+      alert("Firebase Initialization Failed! Check your firebaseConfig keys.");
+    }
+
+    // Global state
+    let schoolsCache = [];
+    let logsCache = [];
+
+    // DOM Elements
+    const schoolSelect = document.getElementById('schoolSelect');
+    const classSelect = document.getElementById('classSelect');
+    const sectionSelect = document.getElementById('sectionSelect');
+    const projectStatusForm = document.getElementById('projectStatusForm');
+    const logsContainer = document.getElementById('logsContainer');
+    const filterSchoolSelect = document.getElementById('filterSchoolSelect');
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+
+    const adminModal = document.getElementById('adminModal');
+    const openGearModalBtn = document.getElementById('openGearModalBtn');
+    const closeGearModalBtn = document.getElementById('closeGearModalBtn');
+    const classMappingContainer = document.getElementById('classMappingContainer');
+    const addClassRowBtn = document.getElementById('addClassRowBtn');
+    const adminSchoolForm = document.getElementById('adminSchoolForm');
+    const adminSchoolName = document.getElementById('adminSchoolName');
+    const editSchoolId = document.getElementById('editSchoolId');
+    const adminFormTitle = document.getElementById('adminFormTitle');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const schoolListContainer = document.getElementById('schoolListContainer');
+
+    // Modal Visibility Toggle
+    openGearModalBtn.addEventListener('click', () => { adminModal.classList.remove('hidden'); });
+    closeGearModalBtn.addEventListener('click', () => { resetAdminForm(); adminModal.classList.add('hidden'); });
+
+    // Responsive Dynamic Class-Section row builder inside Modal
+    function createClassRow(className = '', sectionsStr = '') {
+      const row = document.createElement('div');
+      row.className = 'flex flex-col sm:flex-row gap-2 items-stretch sm:items-center class-mapping-row bg-white sm:bg-transparent p-2.5 sm:p-0 rounded-lg border sm:border-0';
+      row.innerHTML = `
+        <input type="text" placeholder="Class (e.g. Class 5)" value="${className}" required class="w-full sm:w-1/2 border rounded-md p-2 text-sm class-input">
+        <input type="text" placeholder="Sections comma separated (e.g. A, B)" value="${sectionsStr}" required class="w-full sm:w-1/2 border rounded-md p-2 text-sm section-input">
+        <button type="button" class="remove-row-btn text-red-500 hover:text-red-700 font-bold px-2 py-1 text-right sm:text-center text-xs sm:text-base self-end sm:self-auto">&times; Remove</button>
+      `;
+      row.querySelector('.remove-row-btn').addEventListener('click', () => row.remove());
+      return row;
+    }
+
+    addClassRowBtn.addEventListener('click', () => {
+      classMappingContainer.appendChild(createClassRow());
+    });
+
+    // Realtime Listener for Schools List from Realtime DB
+    if (db) {
+      const schoolsRef = ref(db, 'schools');
+      onValue(schoolsRef, (snapshot) => {
+        const data = snapshot.val();
+        schoolsCache = [];
+        if (data) {
+          Object.keys(data).forEach(key => {
+            schoolsCache.push({ id: key, ...data[key] });
+          });
+        }
+        populateSchoolDropdowns();
+        renderAdminSchoolList();
+      }, (error) => {
+        console.error("Realtime DB error loading schools:", error);
+      });
+    }
+
+    // Populate Main and Filter Dropdowns
+    function populateSchoolDropdowns() {
+      // 1. Form dropdown
+      const currentSelected = schoolSelect.value;
+      schoolSelect.innerHTML = '<option value="">-- Choose School --</option>';
       
-  </div>
-  
-</div>
- 
-  <section id="kits">
+      // 2. Filter dropdown
+      const currentFilter = filterSchoolSelect.value;
+      filterSchoolSelect.innerHTML = '<option value="ALL">All Schools</option>';
+
+      schoolsCache.forEach(school => {
+        const option = document.createElement('option');
+        option.value = school.id;
+        option.textContent = school.name;
+        schoolSelect.appendChild(option);
+
+        const filterOption = document.createElement('option');
+        filterOption.value = school.id;
+        filterOption.textContent = school.name;
+        filterSchoolSelect.appendChild(filterOption);
+      });
+
+      schoolSelect.value = currentSelected;
+      filterSchoolSelect.value = currentFilter || 'ALL';
+
+      if (!currentSelected) resetClassAndSection();
+    }
+
+    schoolSelect.addEventListener('change', () => {
+      resetClassAndSection();
+      const school = schoolsCache.find(s => s.id === schoolSelect.value);
+      if (school && school.classes) {
+        classSelect.disabled = false;
+        classSelect.innerHTML = '<option value="">-- Choose Class --</option>';
+        school.classes.forEach((c, index) => {
+          const option = document.createElement('option');
+          option.value = index;
+          option.textContent = c.className;
+          classSelect.appendChild(option);
+        });
+      }
+    });
+
+    classSelect.addEventListener('change', () => {
+      sectionSelect.disabled = true;
+      sectionSelect.innerHTML = '<option value="">-- Choose Section --</option>';
+      
+      const school = schoolsCache.find(s => s.id === schoolSelect.value);
+      const classIndex = classSelect.value;
+
+      if (school && classIndex !== "" && school.classes[classIndex]) {
+        sectionSelect.disabled = false;
+        const sections = school.classes[classIndex].sections || [];
+        sections.forEach(sec => {
+          const option = document.createElement('option');
+          option.value = sec.trim();
+          option.textContent = `Section ${sec.trim()}`;
+          sectionSelect.appendChild(option);
+        });
+      }
+    });
+
+    function resetClassAndSection() {
+      classSelect.innerHTML = '<option value="">-- Choose Class --</option>';
+      classSelect.disabled = true;
+      sectionSelect.innerHTML = '<option value="">-- Choose Section --</option>';
+      sectionSelect.disabled = true;
+    }
+
+    // Save/Update Admin School Configuration in Realtime DB
+    adminSchoolForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const schoolName = adminSchoolName.value.trim();
+      const rows = classMappingContainer.querySelectorAll('.class-mapping-row');
+      
+      const classes = Array.from(rows).map(row => {
+        const className = row.querySelector('.class-input').value.trim();
+        const rawSections = row.querySelector('.section-input').value;
+        const sections = rawSections.split(',').map(s => s.trim()).filter(s => s.length > 0);
+        return { className, sections };
+      });
+
+      try {
+        if (editSchoolId.value) {
+          await update(ref(db, 'schools/' + editSchoolId.value), { name: schoolName, classes });
+          alert("School setup updated successfully!");
+        } else {
+          const newSchoolRef = push(ref(db, 'schools'));
+          await set(newSchoolRef, { name: schoolName, classes });
+          alert("New school saved to Realtime Database!");
+        }
+        resetAdminForm();
+      } catch (err) {
+        console.error("Realtime DB write error:", err);
+        alert("Failed to save to Realtime DB!\nError: " + err.message);
+      }
+    });
+
+    function renderAdminSchoolList() {
+      schoolListContainer.innerHTML = '';
+      if (schoolsCache.length === 0) {
+        schoolListContainer.innerHTML = '<p class="text-gray-400 text-sm">No schools added yet.</p>';
+        return;
+      }
+
+      schoolsCache.forEach(school => {
+        const item = document.createElement('div');
+        item.className = 'border p-3 rounded-lg flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 bg-white';
+        
+        let classSummary = school.classes ? school.classes.map(c => `${c.className} (${c.sections.join(', ')})`).join(' | ') : '';
+
+        item.innerHTML = `
+          <div>
+            <h5 class="font-bold text-gray-800 text-sm sm:text-base">${school.name}</h5>
+            <p class="text-xs text-gray-500">${classSummary || 'No classes added'}</p>
+          </div>
+          <div class="flex gap-3 self-end sm:self-auto">
+            <button class="edit-btn text-blue-600 text-xs sm:text-sm font-semibold hover:underline">Edit</button>
+            <button class="delete-btn text-red-600 text-xs sm:text-sm font-semibold hover:underline">Delete</button>
+          </div>
+        `;
+
+        item.querySelector('.edit-btn').addEventListener('click', () => editSchool(school));
+        item.querySelector('.delete-btn').addEventListener('click', async () => {
+          if (confirm(`Delete ${school.name}?`)) {
+            try {
+              await remove(ref(db, 'schools/' + school.id));
+              alert("School deleted successfully!");
+            } catch (err) {
+              alert("Error deleting: " + err.message);
+            }
+          }
+        });
+
+        schoolListContainer.appendChild(item);
+      });
+    }
+
+    function editSchool(school) {
+      editSchoolId.value = school.id;
+      adminSchoolName.value = school.name;
+      adminFormTitle.textContent = 'Edit School Setup';
+      cancelEditBtn.classList.remove('hidden');
+
+      classMappingContainer.innerHTML = '';
+      if (school.classes && school.classes.length > 0) {
+        school.classes.forEach(c => {
+          classMappingContainer.appendChild(createClassRow(c.className, c.sections.join(', ')));
+        });
+      } else {
+        classMappingContainer.appendChild(createClassRow());
+      }
+    }
+
+    cancelEditBtn.addEventListener('click', resetAdminForm);
+
+    function resetAdminForm() {
+      editSchoolId.value = '';
+      adminSchoolName.value = '';
+      adminFormTitle.textContent = 'Add New School Setup';
+      cancelEditBtn.classList.add('hidden');
+      classMappingContainer.innerHTML = '';
+      classMappingContainer.appendChild(createClassRow());
+    }
     
-  </section>
+    resetAdminForm();
 
-  <section id="tools">
-    <h2>Contact</h2>
-    <p>Email us at: example@email.com</p>
-  </section>
+    // Submit Project Status Entry to Realtime Database
+    projectStatusForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  <section id="project">
-    <h2>Contact</h2>
-    <p>Email us at: example@email.com</p>
-  </section>
-   <section id="electic">
-    <h2>Contact</h2>
-    <p>Email us at: example@email.com</p>
-  </section>
+      const schoolObj = schoolsCache.find(s => s.id === schoolSelect.value);
+      const selectedClassObj = schoolObj ? schoolObj.classes[classSelect.value] : null;
 
-   <section id="about">
-    <h2>About Us</h2>
-    <p>This is a simple single-page layout with orange as the primary color.</p>
-  </section>
+      const payload = {
+        schoolId: schoolSelect.value,
+        schoolName: schoolObj ? schoolObj.name : '',
+        className: selectedClassObj ? selectedClassObj.className : '',
+        section: sectionSelect.value,
+        statusText: document.getElementById('projectStatusText').value.trim(),
+        createdAt: new Date().toISOString()
+      };
 
-  <div class="loading_screen" id="adding_cart">
-    <div><img src="resorces/icons8-shopping-cart.gif" alt=""></div>
-    <br><p>Added in cart.</p>
-  </div>
-  <div class="loading_screen" id="purchecing">
-    <div><img src="resorces/Order Placed.gif" alt=""></div>
-    <br><p>Order Placing...</p>
-  </div>
+      try {
+        const newStatusRef = push(ref(db, 'project_statuses'));
+        await set(newStatusRef, payload);
+        projectStatusForm.reset();
+        resetClassAndSection();
+        alert('Project status recorded in Realtime Database!');
+      } catch (err) {
+        console.error('Error recording status:', err);
+        alert('Failed to save status: ' + err.message);
+      }
+    });
 
-<div id="orderFormConteneer" tabindex="0">
-   
-    <form id="orderForm">
-     <div id="cross_order_form">
-            <button  onclick="hideform()" >❌</button>
-      </div>
-<div id="stage_1">
-  
-  <h2>Place Your Order</h2>
+    // Realtime Listener for Recorded Project Logs
+    if (db) {
+      const logsRef = ref(db, 'project_statuses');
+      onValue(logsRef, (snapshot) => {
+        const data = snapshot.val();
+        logsCache = [];
+        if (data) {
+          logsCache = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+          logsCache.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+        renderFilteredLogs();
+      }, (err) => {
+        console.error("Error loading logs:", err);
+      });
+    }
 
-  <label for="name">Full Name*</label>
-  <input type="text" id="name" name="name" maxlength="30" required>
+    // Filter Change Handler
+    filterSchoolSelect.addEventListener('change', renderFilteredLogs);
 
-  <label for="email">Email*</label>
-  <input type="email" id="email" name="email" required maxlength="150" >
+    // Render Logs based on active Filter
+    function getFilteredLogs() {
+      const selectedSchoolId = filterSchoolSelect.value;
+      if (selectedSchoolId === 'ALL') {
+        return logsCache;
+      }
+      return logsCache.filter(log => log.schoolId === selectedSchoolId);
+    }
 
-  <label for="phone">Phone Number*</label>
-  <input type="tel" id="phone" name="phone"  maxlength="10" pattern="[0-9]{10}"  required>
+    function renderFilteredLogs() {
+      const filtered = getFilteredLogs();
+      logsContainer.innerHTML = '';
 
-    <label for="district">Select District*</label>
-<select  id="district" name="district" required></select>
+      if (filtered.length === 0) {
+        logsContainer.innerHTML = '<p class="text-gray-400 text-sm">No project statuses recorded for this selection.</p>';
+        return;
+      }
 
-  <label for="location">Location*</label>
-  <input type="text" id="location" name="location" placeholder="Street, City" maxlength="250"  required>
-    
-  <label for="map">Google Map Link</label>
-  <input type="url" id="map" name="map" placeholder="https://maps.google.com/..." maxlength="1500" >
+      filtered.forEach(log => {
+        const dateStr = log.createdAt ? new Date(log.createdAt).toLocaleString() : 'Just now';
 
-  <label>Payment Method</label>
-<select id="Payment" name="Payment" required onchange="paymentMethords()">
-  <option value="cod">Cash on Deivery</option>
-  <option value="pre pay">Online Payment</option>
-</select>
+        const card = document.createElement('div');
+        card.className = 'border-l-4 border-indigo-500 bg-gray-50 p-3 sm:p-4 rounded-r-lg space-y-1';
+        card.innerHTML = `
+          <div class="flex flex-col sm:flex-row justify-between sm:items-center text-xs text-gray-500 gap-0.5">
+            <span class="font-semibold text-indigo-600 sm:text-sm">${log.schoolName} &bull; ${log.className} (${log.section})</span>
+            <span>${dateStr}</span>
+          </div>
+          <p class="text-gray-800 text-xs sm:text-sm whitespace-pre-wrap leading-relaxed">${log.statusText}</p>
+        `;
+        logsContainer.appendChild(card);
+      });
+    }
 
-<div id="payment_final">
- <div id="pre_payment_bar">
-   <label class="switch" >
+    // --- PDF Export Handler ---
+    downloadPdfBtn.addEventListener('click', () => {
+      const filtered = getFilteredLogs();
+      if (filtered.length === 0) {
+        alert("No logs available to export for the selected filter.");
+        return;
+      }
 
-  <input type="checkbox" id="myToggle" onclick="toggle_payment()"> 
-  <span class="slider"></span>
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
 
-</label>
-      <h2 style="justify-self: center; text-align: center;" id="qr_title" ></h2>
+      const selectedSchoolText = filterSchoolSelect.options[filterSchoolSelect.selectedIndex].text;
 
+      // PDF Title Header
+      doc.setFontSize(16);
+      doc.setTextColor(79, 70, 229);
+      doc.text("School Project Report by Sachin", 14, 15);
+      
+      doc.setFontSize(10);
+      doc.setTextColor(100);
+      doc.text(`School Scope: ${selectedSchoolText}`, 14, 22);
+      doc.text(`Generated Date: ${new Date().toLocaleString()}`, 14, 27);
 
-  <img class="payment_qr" id="khalti" src="resorces/Kalti.jpg" alt="">
-  <img class="payment_qr" id="bank" src="resorces/Laxmi.jpg" alt="">
+      // Prepare Table Data
+      const tableRows = filtered.map((log, index) => [
+        index + 1,
+        log.schoolName || 'N/A',
+        log.className || 'N/A',
+        log.section || 'N/A',
+        log.createdAt ? new Date(log.createdAt).toLocaleString() : 'N/A',
+        log.statusText || ''
+      ]);
 
- </div>
-  <label>Urgent Mode<input id="tick" type="checkbox" onclick="urgentMode()" name="Urgent"></label>
-  <label id="shiping_fee">Delivery Charge: Rs. 150</label>
-  <label id="grand_total"></label>
+      // Render AutoTable
+      doc.autoTable({
+        startY: 32,
+        head: [['#', 'School', 'Class', 'Section', 'Date & Time', 'Project Status Details']],
+        body: tableRows,
+        theme: 'grid',
+        headStyles: { fillColor: [79, 70, 229], textColor: 255 },
+        columnStyles: {
+          0: { cellWidth: 10 },
+          1: { cellWidth: 35 },
+          2: { cellWidth: 25 },
+          3: { cellWidth: 20 },
+          4: { cellWidth: 35 },
+          5: { cellWidth: 'auto' }
+        },
+        styles: { fontSize: 8, cellPadding: 2.5, overflow: 'linebreak' }
+      });
 
-</div>
-  <button type="button" id="place_order" onclick="placeOrder()">Place Order</button>
-</div>
-<div id="stage_2">
-  <h1 id="done_okay" >✔️</h1>
-  <h1 id="done_okay2" >Done </h1>
-  <p id="notes" ><i>Order Details and every updates are inform via you email so check ther mail. Mail can be shift to spam section so check them Thank you for chooseing us</i> 
-  <br>
-  <strong>Welcome to the World of Electronics 👍😊</strong>
-  </p>
-
-
-
-</div>
-</form>
-  </div>
-
-  </body>
-
-
-  <footer>
-    <p>&copy; 2026 Robo Maker's hub Webpage </p>
-  </footer>
-  <script type="module" src="logics/fatching.js"></script>
-
-<script src="logics/variables.js" ></script>
-<script src="logics/main_logic.js" ></script>
-<script type="text/javascript" src="logics/ordermannager.js"></script>
-<script  src="logics/orderCheck.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="logics/sending emal.js"></script>
-<script src="logics/load_page.js" ></script>
-<script type="text/javascript" src="logics/prodoct_detials.js"></script>
-
+      // Save PDF
+      const filename = `STEAM_Project_Report_${selectedSchoolText.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.pdf`;
+      doc.save(filename);
+    });
+  </script>
+</body>
 </html>
